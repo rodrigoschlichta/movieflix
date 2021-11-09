@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 public class Genre implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String name;
-	
+
 	public Genre() {
-		
 	}
 
 	public Genre(Long id, String name) {
@@ -58,7 +57,5 @@ public class Genre implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

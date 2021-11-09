@@ -4,14 +4,13 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String name;
 	private String email;
 	private String password;
-	
+
 	public User() {
-		
 	}
 
 	public User(Long id, String name, String email, String password) {
@@ -78,7 +77,5 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }
