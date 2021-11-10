@@ -1,16 +1,37 @@
 package com.rschlichta.MovieFlix.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "tb_movie")
 public class Movie implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
 	private String subTitle;
 	private Integer year;
 	private String imgUrl;
 	private String synopsis;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_movie_genre", 
+				joinColumns = @JoinColumn(name = "movie_id"),
+				inverseJoinColumns = @JoinColumn(name = "genre_id"))
+	Set<Genre> genres = new HashSet<>();
 
 	public Movie() {
 		
