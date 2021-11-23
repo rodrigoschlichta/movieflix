@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rschlichta.MovieFlix.dto.MovieDTO;
 import com.rschlichta.MovieFlix.entities.Movie;
 import com.rschlichta.MovieFlix.repositories.MovieRepository;
+import com.rschlichta.MovieFlix.services.exceptions.EntityNotFoundException;
 
 @Service
 public class MovieService {
@@ -28,7 +29,7 @@ public class MovieService {
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
 		Optional<Movie> obj = repository.findById(id);
-		Movie entity = obj.get();
+		Movie entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity Not Found"));
 		return new MovieDTO(entity);
 	}
 }
