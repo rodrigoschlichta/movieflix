@@ -1,11 +1,14 @@
 package com.rschlichta.MovieFlix.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rschlichta.MovieFlix.dto.GenreDTO;
 import com.rschlichta.MovieFlix.entities.Genre;
 import com.rschlichta.MovieFlix.repositories.GenreRepository;
 
@@ -16,8 +19,17 @@ public class GenreService {
 	private GenreRepository repository;
 	
 	@Transactional(readOnly = true)
-	public List<Genre> findAll() {
-		return repository.findAll();
+	public List<GenreDTO> findAll() {
+		List<Genre> list = repository.findAll();
+		return list.stream().map(x -> new GenreDTO(x)).collect(Collectors.toList());
+		
+	}
+	
+	@Transactional(readOnly = true)
+	public GenreDTO findById(Long id) {
+		Optional<Genre> obj = repository.findById(id);
+		Genre entity = obj.get();
+		return new GenreDTO(entity);
 	}
 
 }
