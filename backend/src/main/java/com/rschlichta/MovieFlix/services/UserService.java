@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rschlichta.MovieFlix.dto.UserDTO;
 import com.rschlichta.MovieFlix.entities.User;
 import com.rschlichta.MovieFlix.repositories.UserRepository;
-import com.rschlichta.MovieFlix.services.exceptions.EntityNotFoundException;
+import com.rschlichta.MovieFlix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -29,7 +29,15 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		User entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity Not Found"));
+		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
+		return new UserDTO(entity);
+	}
+
+	@Transactional
+	public UserDTO insert(UserDTO dto) {
+		User entity = new User();
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
 
