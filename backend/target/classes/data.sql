@@ -14,6 +14,27 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (3 , 3);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (4 , 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (4 , 2);
 
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (1 , 1);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (2 , 1);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (3 , 13);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (4 , 13);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (5 , 2);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (6 , 2);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (7 , 2);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (8 , 2);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (9 , 4);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (10 , 4);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (11 , 4);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (12 , 5);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (13 , 3);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (14 , 3);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (15 , 4);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (16 , 3);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (17 , 10);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (18 , 10);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (19 , 10);
+INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (20 , 1);
+
 INSERT INTO tb_genre (name) VALUES ('AÇÃO');
 INSERT INTO tb_genre (name) VALUES ('ANIMAÇÃO');
 INSERT INTO tb_genre (name) VALUES ('AVENTURA');
