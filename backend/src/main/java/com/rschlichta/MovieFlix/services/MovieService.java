@@ -2,6 +2,8 @@ package com.rschlichta.MovieFlix.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,8 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rschlichta.MovieFlix.dto.MovieDTO;
+import com.rschlichta.MovieFlix.dto.ReviewDTO;
+import com.rschlichta.MovieFlix.entities.Genre;
 import com.rschlichta.MovieFlix.entities.Movie;
+import com.rschlichta.MovieFlix.entities.Review;
+import com.rschlichta.MovieFlix.repositories.GenreRepository;
 import com.rschlichta.MovieFlix.repositories.MovieRepository;
+import com.rschlichta.MovieFlix.repositories.ReviewRepository;
 import com.rschlichta.MovieFlix.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -18,6 +25,12 @@ public class MovieService {
 	
 	@Autowired
 	private MovieRepository repository;
+	
+	@Autowired
+	private GenreRepository genreRepository;
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<MovieDTO> findAllPaged(PageRequest pageRequest){
@@ -35,16 +48,46 @@ public class MovieService {
 	
 	@Transactional
 	public MovieDTO insert(MovieDTO dto) {
-		Movie entity = new Movie();
+		Movie movie = new Movie();
+
+		copyDtoToEntity(dto, movie);
+		movie = repository.save(movie);
+
+		return new MovieDTO(movie);
+	}
+
+	private void copyDtoToEntity(MovieDTO dto, Movie entity) {
 		entity.setTitle(dto.getTitle());
 		entity.setSubTitle(dto.getSubTitle());
 		entity.setYear(dto.getYear());
 		entity.setImgUrl(dto.getImgUrl());
 		entity.setSynopsis(dto.getSynopsis());
-		entity = repository.save(entity);
-		return new MovieDTO(entity); 	
 		
+		Genre genre = genreRepository.getOne(dto.getGenreId());
+		entity.setGenre(genre);
+		
+		entity.getReviews().clear();
+		
+		for (ReviewDTO reviewDTO : dto.getReviews()) {
+			Review review = reviewRepository.getOne(reviewDTO.getId());
+			entity.getReviews().add(review);
+		}
 	}
-	
-	
+		
+	@Transactional
+	public MovieDTO update(MovieDTO dto, Long id) {
+		try {
+			Movie movie = repository.getOne(id);
+			copyDtoToEntity(dto, movie);
+			movie = repository.save(movie);
+			return new MovieDTO(movie);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id não Encontrado");
+		}
+	}
+
 }
+	
+	
+

@@ -15,29 +15,27 @@ import com.rschlichta.MovieFlix.entities.Genre;
 import com.rschlichta.MovieFlix.repositories.GenreRepository;
 import com.rschlichta.MovieFlix.services.exceptions.ResourceNotFoundException;
 
-
-
 @Service
 public class GenreService {
 
 	@Autowired
 	private GenreRepository repository;
-	
+
 	@Transactional(readOnly = true)
 	public Page<GenreDTO> findAllPaged(PageRequest pageRequest) {
 		Page<Genre> list = repository.findAll(pageRequest);
-		
+
 		return list.map(x -> new GenreDTO(x));
-		
+
 	}
-	
+
 	@Transactional(readOnly = true)
 	public GenreDTO findById(Long id) {
 		Optional<Genre> obj = repository.findById(id);
-		Genre entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
+		Genre entity = obj.orElseThrow(() -> new ResourceNotFoundException("Gênero não Encontrado"));
 		return new GenreDTO(entity);
 	}
-	
+
 	@Transactional
 	public GenreDTO insert(GenreDTO dto) {
 		Genre entity = new Genre();
@@ -53,12 +51,15 @@ public class GenreService {
 			entity.setName(dto.getName());
 			entity = repository.save(entity);
 			return new GenreDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id não Encontrado " + id);
 		}
-		catch(EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Id Not Found " + id);
-		}
-		
-		
-	}
-}
 
+	}
+
+	public void delete(Long id) {
+		repository.deleteById(id);
+
+	}
+
+}
