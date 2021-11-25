@@ -1,6 +1,8 @@
 package com.rschlichta.MovieFlix.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rschlichta.MovieFlix.entities.Movie;
 
@@ -13,11 +15,15 @@ public class MovieDTO implements Serializable {
 	private Integer year;
 	private String imgUrl;
 	private String synopsis;
+	private String genreName;
+	private Long genreId;
+	
+	private List<ReviewDTO> reviews = new ArrayList<>();
 	
 	public MovieDTO(){
 	}
 
-	public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis) {
+	public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, String genreName, Long genreId) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -25,6 +31,8 @@ public class MovieDTO implements Serializable {
 		this.year = year;
 		this.imgUrl = imgUrl;
 		this.synopsis = synopsis;
+		this.genreName = genreName;
+		this.genreId = genreId;
 	}
 	
 	public MovieDTO(Movie entity) {
@@ -34,6 +42,9 @@ public class MovieDTO implements Serializable {
 		year = entity.getYear();
 		imgUrl = entity.getImgUrl();
 		synopsis = entity.getSynopsis();
+		genreName = entity.getGenre().getName();
+		genreId = entity.getGenre().getId();
+		entity.getReviews().forEach(review -> this.reviews.add(new ReviewDTO(review)));
 	}
 
 	public Long getId() {
@@ -83,7 +94,26 @@ public class MovieDTO implements Serializable {
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
-	
+
+	public String getGenreName() {
+		return genreName;
+	}
+
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
+	}
+
+	public Long getGenreId() {
+		return genreId;
+	}
+
+	public void setGenreId(Long genreId) {
+		this.genreId = genreId;
+	}
+
+	public List<ReviewDTO> getReviews() {
+		return reviews;
+	}
 	
 	
 

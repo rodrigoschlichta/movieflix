@@ -1,14 +1,14 @@
 package com.rschlichta.MovieFlix.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +21,8 @@ public class Genre implements Serializable {
 	private Long id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "genres")
-	private Set<Movie> movies =  new HashSet<>();
+	@OneToMany(mappedBy = "genre")
+	private List<Movie> movies = new ArrayList<>();
 	
 	public Genre() {		
 	}
@@ -46,6 +46,10 @@ public class Genre implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<Movie> getMovies() {
+		return movies;
 	}
 
 	@Override
