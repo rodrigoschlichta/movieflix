@@ -37,6 +37,10 @@ public class MovieService {
 	public MovieDTO insert(MovieDTO dto) {
 		Movie entity = new Movie();
 		entity.setTitle(dto.getTitle());
+		entity.setSubTitle(dto.getSubTitle());
+		entity.setYear(dto.getYear());
+		entity.setImgUrl(dto.getImgUrl());
+		entity.setSynopsis(dto.getSynopsis());
 		entity = repository.save(entity);
 		return new MovieDTO(entity); 	
 		
