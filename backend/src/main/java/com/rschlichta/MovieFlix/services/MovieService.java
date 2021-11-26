@@ -55,7 +55,20 @@ public class MovieService {
 
 		return new MovieDTO(movie);
 	}
-
+		
+	@Transactional
+	public MovieDTO update(MovieDTO dto, Long id) {
+		try {
+			Movie movie = repository.getOne(id);
+			copyDtoToEntity(dto, movie);
+			movie = repository.save(movie);
+			return new MovieDTO(movie);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id não Encontrado");
+		}
+	}
+	
 	private void copyDtoToEntity(MovieDTO dto, Movie entity) {
 		entity.setTitle(dto.getTitle());
 		entity.setSubTitle(dto.getSubTitle());
@@ -71,19 +84,6 @@ public class MovieService {
 		for (ReviewDTO reviewDTO : dto.getReviews()) {
 			Review review = reviewRepository.getOne(reviewDTO.getId());
 			entity.getReviews().add(review);
-		}
-	}
-		
-	@Transactional
-	public MovieDTO update(MovieDTO dto, Long id) {
-		try {
-			Movie movie = repository.getOne(id);
-			copyDtoToEntity(dto, movie);
-			movie = repository.save(movie);
-			return new MovieDTO(movie);
-		}
-		catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Id não Encontrado");
 		}
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rschlichta.MovieFlix.dto.UserDTO;
+import com.rschlichta.MovieFlix.dto.UserInsertDTO;
 import com.rschlichta.MovieFlix.services.UserService;
 
 
@@ -39,12 +40,13 @@ public class UserResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO dto){
-		dto = service.insert(dto);
+	public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto){
+		UserDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				  .buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+				  .buildAndExpand(newDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
 		
 	}
+	
 
 }
