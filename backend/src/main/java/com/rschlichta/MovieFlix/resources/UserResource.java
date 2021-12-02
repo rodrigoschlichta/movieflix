@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rschlichta.MovieFlix.dto.UserDTO;
 import com.rschlichta.MovieFlix.dto.UserInsertDTO;
+import com.rschlichta.MovieFlix.dto.UserUpdateDTO;
 import com.rschlichta.MovieFlix.services.UserService;
 
 
@@ -27,8 +30,8 @@ public class UserResource {
 	
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll(){
-		List<UserDTO> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+	List<UserDTO> list = service.findAll();
+	return ResponseEntity.ok().body(list);
 		
 	}
 	
@@ -48,5 +51,16 @@ public class UserResource {
 		
 	}
 	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<UserDTO> update(@RequestBody UserUpdateDTO dto, @PathVariable Long id){
+		UserDTO newDto= service.update(dto, id);
+		return ResponseEntity.ok().body(newDto);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<UserDTO> delete(@PathVariable Long id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 
 }

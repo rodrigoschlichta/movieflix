@@ -75,7 +75,7 @@ public class MovieService {
 			repository.deleteById(id);
 		}
 		catch (EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException("Id " + id + " not found");
+			throw new ResourceNotFoundException("Id não Encontrado" +id );
 		}
 	}
 	
