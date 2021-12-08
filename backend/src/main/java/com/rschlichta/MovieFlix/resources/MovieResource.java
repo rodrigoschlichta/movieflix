@@ -2,6 +2,8 @@ package com.rschlichta.MovieFlix.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +54,7 @@ public class MovieResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<MovieDTO> insert(@RequestBody MovieDTO dto){
+	public ResponseEntity<MovieDTO> insert(@Valid @RequestBody MovieDTO dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				  .buildAndExpand(dto.getId()).toUri();
@@ -61,7 +63,7 @@ public class MovieResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<MovieDTO> update(@RequestBody MovieDTO dto , @PathVariable Long id){
+	public ResponseEntity<MovieDTO> update(@Valid @RequestBody MovieDTO dto , @PathVariable Long id){
 		dto = service.update(dto, id);
 		return ResponseEntity.ok().body(dto);
 	

@@ -4,15 +4,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import com.rschlichta.MovieFlix.entities.Movie;
 
 public class MovieDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	@NotBlank(message = "Campo Obrigatório")
 	private String title;
+	
+	@NotBlank(message = "Campo Obrigatório")
 	private String subTitle;
-	private Integer year;
+	
+	@NotBlank(message = "Campo Obrigatório")
+	private Integer year;	
 	private String imgUrl;
 	private String synopsis;
 	private String genreName;

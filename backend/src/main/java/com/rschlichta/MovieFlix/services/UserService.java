@@ -26,10 +26,10 @@ import com.rschlichta.MovieFlix.services.exceptions.ResourceNotFoundException;
 public class UserService {
 	
 	@Autowired
-	private UserRepository repository;
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	private UserRepository repository;
 	
 	@Autowired
 	private RoleRepository roleRepository;

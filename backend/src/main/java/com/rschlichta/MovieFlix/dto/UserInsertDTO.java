@@ -1,5 +1,8 @@
 package com.rschlichta.MovieFlix.dto;
 
+import com.rschlichta.MovieFlix.services.validation.UserInsertValid;
+
+@UserInsertValid
 public class UserInsertDTO extends UserDTO {
 
 	private static final long serialVersionUID = 1L;
