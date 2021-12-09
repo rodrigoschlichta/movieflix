@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotBlank;
-
 import com.rschlichta.MovieFlix.entities.Movie;
 
 public class MovieDTO implements Serializable {
@@ -13,13 +11,10 @@ public class MovieDTO implements Serializable {
 	
 	private Long id;
 	
-	@NotBlank(message = "Campo Obrigatório")
 	private String title;
 	
-	@NotBlank(message = "Campo Obrigatório")
 	private String subTitle;
 	
-	@NotBlank(message = "Campo Obrigatório")
 	private Integer year;	
 	private String imgUrl;
 	private String synopsis;
