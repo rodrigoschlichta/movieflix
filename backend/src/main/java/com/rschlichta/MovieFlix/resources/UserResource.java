@@ -20,15 +20,27 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.rschlichta.MovieFlix.dto.UserDTO;
 import com.rschlichta.MovieFlix.dto.UserInsertDTO;
 import com.rschlichta.MovieFlix.dto.UserUpdateDTO;
+import com.rschlichta.MovieFlix.resources.exceptions.OAuthCustomError;
 import com.rschlichta.MovieFlix.services.UserService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
 @RestController
 @RequestMapping(value = "/users")
+@Api(tags = "User Resource")
 public class UserResource {
 	
 	@Autowired
 	private UserService service;
+	
+	@ApiOperation(value = "View all Genres")
+	@ApiResponses({ @ApiResponse(code = 200, message = "ok"),
+			@ApiResponse(code = 401, message = "unauthorized", response = OAuthCustomError.class),
+			@ApiResponse(code = 403, message = "forbidden", response = OAuthCustomError.class) })
 	
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll(){

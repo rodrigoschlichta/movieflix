@@ -19,15 +19,27 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rschlichta.MovieFlix.dto.GenreDTO;
+import com.rschlichta.MovieFlix.resources.exceptions.OAuthCustomError;
 import com.rschlichta.MovieFlix.services.GenreService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
 @RestController
 @RequestMapping(value = "/genres")
+@Api(tags = "Genre Resource")
 public class GenreResource {
 	
 	@Autowired
 	private GenreService service;
+	
+	@ApiOperation(value = "View all Genres")
+	@ApiResponses({ @ApiResponse(code = 200, message = "ok"),
+			@ApiResponse(code = 401, message = "unauthorized", response = OAuthCustomError.class),
+			@ApiResponse(code = 403, message = "forbidden", response = OAuthCustomError.class) })
 	
 	@GetMapping
 	public ResponseEntity<Page<GenreDTO>> findAll(

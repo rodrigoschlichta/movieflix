@@ -34,8 +34,9 @@ public class MovieService {
 	private ReviewRepository reviewRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<MovieDTO> findAllPaged(PageRequest pageRequest){
-		Page<Movie> list = repository.findAll(pageRequest);	
+	public Page<MovieDTO> findAllPaged(Long genreId, PageRequest pageRequest){
+		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);
+		Page<Movie> list = repository.find(genre,pageRequest);	
 		return list.map(x -> new MovieDTO(x));
 		
 	}

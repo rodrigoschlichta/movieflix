@@ -21,19 +21,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rschlichta.MovieFlix.dto.MovieDTO;
+import com.rschlichta.MovieFlix.resources.exceptions.OAuthCustomError;
 import com.rschlichta.MovieFlix.services.MovieService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
 @RestController
 @RequestMapping(value = "/movies")
+@Api(tags  = "Movie Resource")
 public class MovieResource {
 	
 	@Autowired
 	private MovieService service;
 	
+	@ApiOperation(value = "View all Genres")
+	@ApiResponses({ @ApiResponse(code = 200, message = "ok"),
+			@ApiResponse(code = 401, message = "unauthorized", response = OAuthCustomError.class),
+			@ApiResponse(code = 403, message = "forbidden", response = OAuthCustomError.class) })
+	
 	@GetMapping
 	public ResponseEntity<Page<MovieDTO>> findAll(
 			
+			@RequestParam (value = "genreId", defaultValue = "0") Long genreId,
 			@RequestParam (value = "page", defaultValue = "0") Integer page,
 			@RequestParam (value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam (value = "orderBy", defaultValue = "title") String orderBy,
@@ -43,7 +56,7 @@ public class MovieResource {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Page<MovieDTO> list = service.findAllPaged(pageRequest);
+		Page<MovieDTO> list = service.findAllPaged(genreId, pageRequest);
 		return ResponseEntity.ok().body(list);
 	}
 	
