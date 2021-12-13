@@ -28,53 +28,53 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-
 @RestController
 @RequestMapping(value = "/users")
 @Api(tags = "User Resource")
 public class UserResource {
-	
+
 	@Autowired
 	private UserService service;
-	
+
 	@ApiOperation(value = "View all Genres")
 	@ApiResponses({ @ApiResponse(code = 200, message = "ok"),
 			@ApiResponse(code = 401, message = "unauthorized", response = OAuthCustomError.class),
 			@ApiResponse(code = 403, message = "forbidden", response = OAuthCustomError.class) })
-	
+
 	@GetMapping
-	public ResponseEntity<List<UserDTO>> findAll(){
-	List<UserDTO> list = service.findAll();
-	return ResponseEntity.ok().body(list);
-		
+	public ResponseEntity<List<UserDTO>> findAll() {
+		List<UserDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> findById(@PathVariable Long id){
+	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
 		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
-		
+
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto){
+	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {
 		UserDTO newDto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				  .buildAndExpand(newDto.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
 		return ResponseEntity.created(uri).body(newDto);
-		
+
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> update(@Valid @RequestBody UserUpdateDTO dto, @PathVariable Long id){
-		UserDTO newDto= service.update(dto, id);
+	public ResponseEntity<UserDTO> update(@Valid @RequestBody UserUpdateDTO dto, @PathVariable Long id) {
+		UserDTO newDto = service.update(dto, id);
 		return ResponseEntity.ok().body(newDto);
+
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> delete(@PathVariable Long id){
+	public ResponseEntity<UserDTO> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+
 	}
 
 }
