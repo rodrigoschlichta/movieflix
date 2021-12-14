@@ -34,7 +34,7 @@ import com.rschlichta.MovieFlix.repositories.MovieRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class MovieResourceIt {
+public class MovieResourceIT {
 
 	@Autowired
 	private MockMvc mockMvc;

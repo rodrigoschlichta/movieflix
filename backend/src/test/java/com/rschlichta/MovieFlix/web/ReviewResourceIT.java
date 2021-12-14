@@ -29,7 +29,7 @@ import com.rschlichta.MovieFlix.repositories.ReviewRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ReviewResourceIt {
+public class ReviewResourceIT {
 
 	@Autowired
 	private MockMvc mockMvc;

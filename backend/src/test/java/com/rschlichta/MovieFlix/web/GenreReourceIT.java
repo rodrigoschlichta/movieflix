@@ -98,7 +98,7 @@ public class GenreReourceIT {
 		ResultActions result =
 				mockMvc.perform(get("/genres")
 					.header("Authorization", "Bearer " + accessToken)
-					.contentType(MediaType.APPLICATION_JSON));
+					.accept(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
 		Assertions.assertEquals(countGenres, getGenres(result).length);

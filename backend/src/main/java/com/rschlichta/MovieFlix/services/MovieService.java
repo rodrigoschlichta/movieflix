@@ -37,15 +37,15 @@ public class MovieService {
 	public Page<MovieDTO> findAllPaged(Long genreId, PageRequest pageRequest){
 		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);
 		Page<Movie> list = repository.find(genre,pageRequest);	
-		return list.map(x -> new MovieDTO(x));
+		return list.map(movie -> new MovieDTO(movie));
 		
 	}
 	
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
 		Optional<Movie> obj = repository.findById(id);
-		Movie entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
-		return new MovieDTO(entity);
+		Movie movie = obj.orElseThrow(() -> new ResourceNotFoundException("Entity Not Found"));
+		return new MovieDTO(movie);
 	}
 	
 	@Transactional

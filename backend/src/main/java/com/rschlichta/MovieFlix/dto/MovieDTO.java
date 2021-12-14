@@ -10,11 +10,8 @@ public class MovieDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	
 	private String title;
-	
 	private String subTitle;
-	
 	private Integer year;	
 	private String imgUrl;
 	private String synopsis;
