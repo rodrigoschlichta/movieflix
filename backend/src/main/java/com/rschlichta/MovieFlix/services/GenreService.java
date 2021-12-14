@@ -25,7 +25,6 @@ public class GenreService {
 	@Transactional(readOnly = true)
 	public Page<GenreDTO> findAllPaged(PageRequest pageRequest) {
 		Page<Genre> list = repository.findAll(pageRequest);
-
 		return list.map(x -> new GenreDTO(x));
 
 	}

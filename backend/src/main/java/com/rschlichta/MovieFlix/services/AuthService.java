@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rschlichta.MovieFlix.entities.User;
 import com.rschlichta.MovieFlix.repositories.UserRepository;
 import com.rschlichta.MovieFlix.services.exceptions.ForbiddenException;
-import com.rschlichta.MovieFlix.services.exceptions.UnauthorizedException;
+import com.rschlichta.MovieFlix.services.exceptions.UnAuthorizedException;
 
 @Service
 public class AuthService {
@@ -25,7 +25,7 @@ public class AuthService {
       return repository.findByEmail(username);
     } catch (Exception e) {
       LOG.error("method=authenticated, msg=user authenticated not found");
-      throw new UnauthorizedException("Invalid User");
+      throw new UnAuthorizedException("Invalid User");
     }
   }
 

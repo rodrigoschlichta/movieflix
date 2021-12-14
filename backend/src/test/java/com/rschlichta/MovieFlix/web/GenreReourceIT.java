@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,24 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rschlichta.MovieFlix.dto.GenreDTO;
+import com.rschlichta.MovieFlix.repositories.GenreRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class GenreResourceIt {
+public class GenreReourceIT {
 
 	@Autowired
 	private MockMvc mockMvc;
 
+	@Autowired
+	private GenreRepository genreRepository;
+	
+	@Autowired
+	private ObjectMapper objectMapper;
+	
 	@Value("${security.oauth2.client.client-id}")
 	private String clientId;
 
@@ -39,7 +48,8 @@ public class GenreResourceIt {
 	private String visitorUsername;
 	private String visitorPassword;
 	private String memberUsername;
-	private String memberPassword;
+	private String memberPassword;;
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -48,6 +58,7 @@ public class GenreResourceIt {
 		visitorPassword = "123456";
 		memberUsername = "ana@gmail.com";
 		memberPassword = "123456";
+	
 	}
 
 	@Test
@@ -56,6 +67,7 @@ public class GenreResourceIt {
 		ResultActions result =
 				mockMvc.perform(get("/genres")
 					.contentType(MediaType.APPLICATION_JSON));
+		
 
 		result.andExpect(status().isUnauthorized());
 	}
@@ -64,29 +76,39 @@ public class GenreResourceIt {
 	public void findAllShouldReturnAllGenresWhenVisitorAuthenticated() throws Exception {
 
 		String accessToken = obtainAccessToken(visitorUsername, visitorPassword);
-				
+		
+		long countGenres = genreRepository.count();		
+
 		ResultActions result =
 				mockMvc.perform(get("/genres")
 					.header("Authorization", "Bearer " + accessToken)
 					.contentType(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
-
+		Assertions.assertEquals(countGenres, getGenres(result).length);
 	}
 	
 	@Test
 	public void findAllShouldReturnAllGenresWhenMemberAuthenticated() throws Exception {
 
 		String accessToken = obtainAccessToken(memberUsername, memberPassword);
-	
+
+		long countGenres = genreRepository.count();		
+
 		ResultActions result =
 				mockMvc.perform(get("/genres")
 					.header("Authorization", "Bearer " + accessToken)
 					.contentType(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
+		Assertions.assertEquals(countGenres, getGenres(result).length);
 	}
 
+	private GenreDTO[] getGenres(ResultActions result) throws Exception {
+		String json = result.andReturn().getResponse().getContentAsString();
+		return objectMapper.readValue(json, GenreDTO[].class);
+	}
+	
 	private String obtainAccessToken(String username, String password) throws Exception {
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

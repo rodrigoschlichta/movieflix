@@ -1,9 +1,9 @@
 package com.rschlichta.MovieFlix.services.exceptions;
 
-public class UnauthorizedException extends RuntimeException{
+public class UnAuthorizedException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 
-	public UnauthorizedException(String msg) {
+	public UnAuthorizedException(String msg) {
 	    super(msg);
 	  }
 	}

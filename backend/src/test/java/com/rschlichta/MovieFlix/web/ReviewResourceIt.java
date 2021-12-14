@@ -138,7 +138,7 @@ public class ReviewResourceIt {
 
 		result.andExpect(status().isUnprocessableEntity());
 	}
-
+	
 	private String obtainAccessToken(String username, String password) throws Exception {
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -157,4 +157,5 @@ public class ReviewResourceIt {
 		JacksonJsonParser jsonParser = new JacksonJsonParser();
 		return jsonParser.parseMap(resultString).get("access_token").toString();
 	}
+	
 }
