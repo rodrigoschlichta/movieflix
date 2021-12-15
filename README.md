@@ -1,6 +1,6 @@
 # movieflix
 
-https://github.com/devsuperior/sds1-wmazoni/blob/9556a26d41c79fe19b772ee54650e4f8296367ef/LICENSE
+LICENSE
 
 # Sobre o projeto
 
