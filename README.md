@@ -1,7 +1,5 @@
 # movieflix
 
-LICENSE
-
 # Sobre o projeto
 
 MovieFlix é uma aplicação full stack web e mobile construída durante o BootCamp DevSuperior, evento organizado pela [DevSuperior]
