@@ -1,4 +1,4 @@
-# movieflix
+# MovieFlix
 
 # Sobre o projeto
 
