@@ -1,8 +1,13 @@
-import react from 'react';
+import React from 'react';
+import './core/assets/styles/custon.scss';
+import './app.scss';
+import Rota from './Rota';
 
 
 const App = () => {
-    return <h1>Hello World!</h1>
+    return (
+        <Rota />
+    );
 }
 
 
