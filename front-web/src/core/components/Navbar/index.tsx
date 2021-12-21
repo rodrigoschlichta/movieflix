@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.scss';
+import './style.scss';
 
 const Navbar = () => (
     <nav className="row bg-primary main-nav">
