@@ -3,39 +3,99 @@
     max-width: 1440px;
     margin: 0 auto;
     padding: 60px 120px;
-  }
+}
 
- .home-content{
-   width: 397px;
-   height: 460px;
-   left: 70px;
-   top: 149px;
-   
- } 
+.home-content {
+    width: 397px;
+    height: 460px;
+    left: 70px;
+    top: 149px;
+}
 
-.home-title{
+.home-title {
     width: 370px;
     font-size: 48px;
     margin-left: 9px;
     margin-top: 20px;
     margin-right: 950px;
-} 
-
-.home-subTitle{
-   width: 320px;
-   font-size: 22px;
-   font-weight: normal;
-   margin-left: 9px;
-   margin-top: 20px;
-   font-style: normal;
-   letter-spacing: -0.015em;
-   color: #F2F2F2;
 }
 
-.home-image{
-   padding-top: 30px;
-   margin-bottom: 0px;
-   width: 500px;
-   height: 320px;
-   margin-left: -20px;
+.home-subTitle {
+    width: 320px;
+    font-size: 22px;
+    font-weight: normal;
+    margin-left: 9px;
+    margin-top: 20px;
+    font-style: normal;
+    letter-spacing: -0.015em;
+    color: #F2F2F2;
+}
+
+.home-image {
+    padding-top: 30px;
+    margin-bottom: 0px;
+    width: 500px;
+    height: 320px;
+    margin-left: -20px;
+}
+
+.home-form-auth {
+    width: 475px;
+    height: 510px;
+    margin-left: 700px;
+    margin-right: 116px;
+    margin-top: -490px;
+    background: #6C6C6C;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+
+.home-login {
+    text-align: center;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 65px;
+    padding-top: 50px;
+}
+
+.form-input-email {
+    width: 380px;
+    height: 47px;
+    margin-top: 36px;
+    margin-left: 51px;
+    border-radius: 3px;
+}
+
+.form-input-senha {
+    width: 380px;
+    height: 47px;
+    margin-top: 36px;
+    margin-left: 51px;
+    border-radius: 3px;
+}
+
+.btn-form {
+    width: 380px;
+    height: 60px;
+    margin-top: 46px;
+    margin-left: 51px;
+    background: #FFC700;
+}
+
+.btn-button {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #000000;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
