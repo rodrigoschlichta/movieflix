@@ -1,0 +1,69 @@
+.movies-details-container{
+    width: auto;
+    height: 510px;
+    margin-left: 134px;
+    margin-top: 40px;
+    margin-right: 140px;
+    background: #6C6C6C;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;   
+}
+
+.movies-image{
+    width: 500px;
+    height: 314px;
+    padding-left: 40px;
+    padding-top: 40px;
+    
+}
+
+.movie-title-details{
+    width: 500px;
+    height: 49px;
+    text-align: center;
+    padding-left: 40px;
+    padding-top: 40px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 49px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.movie-year-details{
+    width:264px;
+    height: 33px;
+    padding-left: 60px;
+    text-align: left;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: -0.015em;
+    color: #FFC700;
+}
+
+.movie-subTitle-details{
+    white-space: nowrap;
+    padding-top: 8px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 33px;
+    color: #FFFFFF;
+}
+
+.movie-review-details{
+    width: 480px;
+    height: 290px;
+    margin-top: 16px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 1px solid #E1E1E1;
+    box-sizing: border-box;
+    border-radius: 10px;
+}

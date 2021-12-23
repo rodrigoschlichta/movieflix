@@ -8,7 +8,7 @@ const MovieCard = () => (
                 <div>
                     <h6 className="movie-title">O Retorno do Rei</h6>
                     <div className="movie-year-container">
-                        <h6>2013</h6>
+                        <h5>2013</h5>
                         <div className="movie-subTitle-container">
                             <h6>O olho do inimigo está se movendo.</h6>
                         </div>
