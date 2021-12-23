@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MovieCard from './components/MovieCard';
 import './style.scss';
 
@@ -12,12 +13,12 @@ const Movie = () => (
         </select>  
 
         <div className = "card-movies">
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
+        <Link to= "/movies/1"><MovieCard /></Link> 
+        <Link to= "/movies/2"><MovieCard /></Link>   
+        <Link to= "/movies/3"><MovieCard /></Link>   
+        <Link to= "/movies/4"><MovieCard /></Link>    
+        <Link to= "/movies/5"><MovieCard /></Link>  
+        <Link to= "/movies/6"><MovieCard /></Link>    
         </div>
         
 

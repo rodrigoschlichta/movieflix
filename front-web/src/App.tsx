@@ -1,7 +1,7 @@
 import React from 'react';
 import './core/assets/styles/custon.scss';
 import './app.scss';
-import Rota from './Rota';
+import Rota from './Rotas';
 
 
 const App = () => {
