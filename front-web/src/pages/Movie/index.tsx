@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from './components/MovieCard';
 import './style.scss';
 
-const Movie = () => (
+const Movie = () => {
+
+    useEffect(() => {
+
+        fetch('http://localhost:3000/movies');
+
+    }, []);
+
+    return(
    
     <div className="movie-genre-content">
         <select className="select-card">
@@ -26,5 +34,7 @@ const Movie = () => (
 
 
 );
+
+}
 
 export default Movie;
