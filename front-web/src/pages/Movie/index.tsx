@@ -36,6 +36,12 @@ const Movie = () => {
         <Link to= "/movies/3"><MovieCard /></Link>   
         <Link to= "/movies/4"><MovieCard /></Link>    
         <Link to= "/movies/5"><MovieCard /></Link>  
+        <Link to= "/movies/6"><MovieCard /></Link>
+        <Link to= "/movies/1"><MovieCard /></Link> 
+        <Link to= "/movies/2"><MovieCard /></Link>   
+        <Link to= "/movies/3"><MovieCard /></Link>   
+        <Link to= "/movies/4"><MovieCard /></Link>    
+        <Link to= "/movies/5"><MovieCard /></Link>  
         <Link to= "/movies/6"><MovieCard /></Link>    
         </div>
         
