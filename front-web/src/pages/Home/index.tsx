@@ -22,7 +22,7 @@ const Home = () => (
         <input type="email" placeholder="E-mail" className="form-input-email" name="username"></input>
         <input type="password" placeholder="Senha" className="form-input-senha" name="password"></input>
         <div>
-          <button className="btn-form">
+          <button type = "submit" className="btn-form">
             <h3 className="btn-button">FAZER LOGIN</h3>
           </button>
         </div>

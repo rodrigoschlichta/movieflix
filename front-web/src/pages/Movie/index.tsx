@@ -18,16 +18,16 @@ const Movie = () => {
         <option value="valor1">AÇÃO</option>
         <option value="valor2">ANIMAÇÃO</option>
         <option value="valor3">AVENTURA</option>
-        <option value="valor1">COMÉDIA</option>
-        <option value="valor2">COMÉDIA ROMÂNTICA</option>
-        <option value="valor3">DOCUMENTÁRIO</option>
-        <option value="valor2">DRAMA</option>
-        <option value="valor3">FICÇÃO CIENTÍFICA</option>
-        <option value="valor1">MIMIZENTO</option>
-        <option value="valor2">MUSICAL</option>
-        <option value="valor3">ROMANCE</option>
-        <option value="valor2">SUSPENSE</option>
-        <option value="valor3">TERROR</option>
+        <option value="valor4">COMÉDIA</option>
+        <option value="valor5">COMÉDIA ROMÂNTICA</option>
+        <option value="valor6">DOCUMENTÁRIO</option>
+        <option value="valor7">DRAMA</option>
+        <option value="valor8">FICÇÃO CIENTÍFICA</option>
+        <option value="valor9">MIMIZENTO</option>
+        <option value="valor10">MUSICAL</option>
+        <option value="valor11">ROMANCE</option>
+        <option value="valor12">SUSPENSE</option>
+        <option value="valor13">TERROR</option>
         </select>  
 
         <div className = "card-movies">
