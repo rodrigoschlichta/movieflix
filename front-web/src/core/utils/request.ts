@@ -8,7 +8,7 @@ export type LoginData = {
   password: string
 }
 
-const BASE_URL = process.env.REACT_APP_BASE_URL ?? 'http://localhost:8080'
+const BASE_URL = 'http://localhost:8080';
 
 axios.interceptors.response.use(function(response) {
   return response
@@ -38,7 +38,7 @@ export const makePrivateRequest = (params: AxiosRequestConfig) => {
 }
 
 export const makeLogin = (loginData: LoginData) => {
-  const token = `${CLIENT_ID}:${CLIENT_SECRET}`
+  const token = `${CLIENT_ID}:${CLIENT_SECRET}`;
 
   const headers = {
     Authorization: `Basic ${window.btoa(token)}`,

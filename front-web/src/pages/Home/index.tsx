@@ -18,6 +18,7 @@ const Home = () => {
     
 
     const onSubmit = (data: FormData) => {
+
       makeLogin(data)
         .then(response => {
           setHasError(false)
@@ -47,7 +48,7 @@ const Home = () => {
         <h1 className="home-login">Login</h1>
         {hasError && (
               <div className="alert">
-                <p className="alert-text">Usuário ou senha inválidos!</p>
+                <p className="alert-text">Dados inválidos!</p>
                 <span className="close" onClick={ () => setHasError(false) }>X</span>
               </div>
             )}
