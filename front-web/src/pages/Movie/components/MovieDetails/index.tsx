@@ -1,58 +1,84 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { ReactComponent as MovieImage } from '../../../../core/images/imageDetails.svg'
-import MovieListReview from '../MovieListReview';
-import MovieReview from '../MovieReview';
-import './style.scss';
+import { useCallback, useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+
+import { Movie } from '../../../../core/types/Movie'
+import { getAccessTokenDecoded } from '../../../../core/utils/auth'
+import { makePrivateRequest } from '../../../../core/utils/request'
+import ListReviews from './components/ListReviews'
+import MovieDetailsLoad from './components/MovieDetailsLoaders/MovieDetailsLoad'
+import MovieListReviewsLoader from './components/MovieDetailsLoaders/MovieListReviewsLoader'
+import MovieSaveReviewLoader from './components/MovieDetailsLoaders/MovieSaveReviewLoader'
+import SaveReview from './components/SaveReview'
+
+import './style.scss'
 
 type ParamsType = {
-    movieId: string;
+  movieId: string
 }
 
 const MovieDetails = () => {
-    const { movieId } = useParams<ParamsType>();
+  const { movieId } = useParams<ParamsType>()
+  const [movie, setMovie] = useState<Movie>()
+  const [hasPermission, setHasPermission] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-    console.log(movieId);
+  const getMovies = useCallback(() => {
+    makePrivateRequest({ url: `/movies/${movieId}` })
+      .then(response => {
+        setMovie(response.data)
+        setIsLoading(false)
+      })
+  }, [movieId])
 
-    return (
-        <div className="movies-details-container">
-            <div className="row">
-                <div className="col-6 movies-image">
-                    <MovieImage />
-                </div>
-                <div className="col-6 movie-title-details">
-                    <h1>O Retorno do Rei</h1>
-                    <div className="movie-year-details">
-                        <h3>2013</h3>
-                        <div className="movie-subTitle-details">
-                            <h5>O olho do inimigo está se movendo.</h5>
-                        </div>
-                        <div className="movie-review-details">
-                        <p className = "review">O confronto final entre as forças do bem e do mal que lutam pelo controle do futuro da
-                        Terra Média se aproxima. Sauron planeja um grande ataque a Minas Tirith, capital de Gondor, 
-                        o que faz com que Gandalf e Pippin partam para o local na intenção de ajudar a resistência. 
-                        Um exército é reunido por Theoden em Rohan, em mais uma tentativa de deter as forças 
-                        de Sauron. Enquanto isso, Frodo, Sam e Gollum seguem sua viagem rumo à Montanha da Perdição 
-                        para destruir o anel. </p>
-                        </div>
+  useEffect(() => {
+    const currentUser = getAccessTokenDecoded()
+    setHasPermission(currentUser.authorities.toString() === 'ROLE_MEMBER')
 
-                    </div>
+    getMovies()
+  }, [getMovies])
 
-                </div>
+  return (
+    <div className="movie-details-container">
+      {isLoading ? (
+        <MovieDetailsLoad />
+      ) : (
+        <div className="movie-details-content">
+          <div className="movie-details-image-container">
+            <img src={ movie?.imgUrl } alt={ movie?.title } className="movie-details-image" />
+          </div>
+
+          <div className="movie-details-info">
+            <h1 className="movie-details-title">{ movie?.title }</h1>
+            <span className="movie-details-year">{ movie?.year }</span>
+            <h3 className="movie-details-subtitle">{ movie?.subTitle }</h3>
+            <div className="movie-details-description-container">
+              <p className="movie-details-description-text">
+                { movie?.synopsis }
+              </p>
             </div>
-            <div>
-                <MovieReview />
-                
-            </div>
-            <div>
-            < MovieListReview />
-            </div>
+          </div>
         </div>
+      )}
 
+      {hasPermission && isLoading ? (
+        <MovieSaveReviewLoader />
+      ) : hasPermission && (
+        <SaveReview movieId={ movieId } />
+      )}
 
-    );
+      {isLoading ? (
+        <MovieListReviewsLoader />
+      ) : (
+        movie?.reviews.length !== 0 && (
+          <div className="reviews-container">
+            {movie?.reviews.map(review => (
+              <ListReviews review={ review } key={review.id} />
+            ))}
+          </div>
+        )
+      )}
+    </div>
+  )
+}
 
-};
-
-
-export default MovieDetails;
+export default MovieDetails

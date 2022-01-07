@@ -1,33 +1,49 @@
-.movie-genre-content {
-    width:auto;
-    height: 80px;
-    margin-left: 140px;
-    margin-right: 140px;
-    margin-top: 42px;
-    background: #6C6C6C;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 4px;
-
-}
-
-.select-card {
-    width: 260px;
-    height: 50px;
-    margin-left: 20px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 16px;
-    padding-left: 12px;
-    background: #6C6C6C;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 4px;
-}
-
-.card-movies{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, 260px);
+.movies-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 30px 120px 70px 120px;
+  }
+  
+  .movie-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 270px);
+    gap: 30px 20px;
     justify-content: space-between;
-
-}
+  }
+  
+  @media (max-width: 1090px) {
+    .movie-content {
+      grid-template-columns: repeat(auto-fill, 230px);
+      gap: 30px 5px;
+    }
+  }
+  
+  @media (max-width: 969px) {
+    .movie-content {
+      grid-template-columns: repeat(auto-fill, 270px);
+      gap: 30px 20px;
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .movie-content {
+      grid-template-columns: repeat(auto-fill, 230px);
+      gap: 30px 5px;
+    }
+  }
+  
+  @media (max-width: 720px) {
+    .movies-container {
+      display: flex;
+      padding: 30px 50px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .movie-content {
+      grid-template-columns: 1fr;
+      row-gap: 30px;
+    }
+  }

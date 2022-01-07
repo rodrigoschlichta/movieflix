@@ -14,7 +14,7 @@ type LoginResponse = {
 }
 
 type AccessToken = {
-  exp: number // é o tempo de expiração
+  exp: number 
   user_name: string
   authorities: Role[]
 }
@@ -22,12 +22,12 @@ type AccessToken = {
 export type Role = 'ROLE_VISITOR' | 'ROLE_MEMBER'
 
 export const saveSessionData = (loginResponse: LoginResponse) => {
-  localStorage.setItem('authData', JSON.stringify(loginResponse)) // JSON.stringify() --> Transforma objeto em string
+  localStorage.setItem('authData', JSON.stringify(loginResponse)) 
 }
 
-export const getSessionData = () => { // Recupera os dados da sessão do usuário
+export const getSessionData = () => { 
   const sessionData = localStorage.getItem('authData') ?? '{}'
-  const parsedSessionData = JSON.parse(sessionData) // JSON.parse() --> Transforma string em objeto
+  const parsedSessionData = JSON.parse(sessionData) 
 
   return parsedSessionData as LoginResponse
 }

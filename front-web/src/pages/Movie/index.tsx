@@ -1,56 +1,72 @@
-import React, { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import Filter from './components/Filter';
 import MovieCard from './components/MovieCard';
+import { Genre, MovieResponse } from '../../core/types/Movie';
+import { makePrivateRequest } from '../../core/utils/request';
+import Pagination from './components/Pagination';
+
 import './style.scss';
+import MovieCardLoader from './components/MovieCardLoader';
 
-const Movie = () => {
+const Movies = () => {
+  const [moviesResponse, setMoviesResponse] = useState<MovieResponse>()
+  const [activePage, setActivePage] = useState(0)
+  const [genre, setGenre] = useState<Genre>()
+  const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
+  const getMovies = useCallback(() => {
+    const params = {
+      linesPerPage: 12,
+      genreId: genre?.id,
+      page: activePage
+    }
 
-        fetch('http://localhost:3000/movies');
+    makePrivateRequest({ url: '/movies', params })
+      .then(response => {
+        setMoviesResponse(response.data)
+        setIsLoading(false)
+      })
+  }, [activePage, genre?.id])
 
-    }, []);
+  useEffect(() => {
+    getMovies()
+  }, [getMovies])
 
-    return(
-   
-    <div className="movie-genre-content">
-        <select className="select-card">
-        <option value="valor1">AÇÃO</option>
-        <option value="valor2">ANIMAÇÃO</option>
-        <option value="valor3">AVENTURA</option>
-        <option value="valor4">COMÉDIA</option>
-        <option value="valor5">COMÉDIA ROMÂNTICA</option>
-        <option value="valor6">DOCUMENTÁRIO</option>
-        <option value="valor7">DRAMA</option>
-        <option value="valor8">FICÇÃO CIENTÍFICA</option>
-        <option value="valor9">MIMIZENTO</option>
-        <option value="valor10">MUSICAL</option>
-        <option value="valor11">ROMANCE</option>
-        <option value="valor12">SUSPENSE</option>
-        <option value="valor13">TERROR</option>
-        </select>  
+  const handleChangeGenre = (genre: Genre) => {
+    setActivePage(0)
+    setGenre(genre)
+  }
 
-        <div className = "card-movies">
-        <Link to= "/movies/1"><MovieCard /></Link> 
-        <Link to= "/movies/2"><MovieCard /></Link>   
-        <Link to= "/movies/3"><MovieCard /></Link>   
-        <Link to= "/movies/4"><MovieCard /></Link>    
-        <Link to= "/movies/5"><MovieCard /></Link>  
-        <Link to= "/movies/6"><MovieCard /></Link>
-        <Link to= "/movies/1"><MovieCard /></Link> 
-        <Link to= "/movies/2"><MovieCard /></Link>   
-        <Link to= "/movies/3"><MovieCard /></Link>   
-        <Link to= "/movies/4"><MovieCard /></Link>    
-        <Link to= "/movies/5"><MovieCard /></Link>  
-        <Link to= "/movies/6"><MovieCard /></Link>    
-        </div>
-        
+  return (
+    <div className="movies-container">
+      <Filter
+        genre={ genre }
+        handleChangeGenre={ handleChangeGenre }
+      />
 
+      <div className="movie-content">
+        { isLoading ? (
+          <MovieCardLoader />
+        ) : (
+          moviesResponse?.content.map(movie => (
+            <Link to={ `/movies/${movie.id}` } key={ movie.id }>
+              <MovieCard movie={ movie } />
+            </Link>
+          ))
+        )}
+      </div>
+
+      {moviesResponse && (
+        <Pagination
+          totalPages={ moviesResponse.totalPages }
+          activePage={ activePage }
+          onChange={ page => setActivePage(page) }
+        />
+      )}
     </div>
-
-
-);
-
+  )
 }
 
-export default Movie;
+export default Movies;

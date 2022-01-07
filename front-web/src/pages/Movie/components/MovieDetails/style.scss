@@ -1,81 +1,164 @@
-.movies-details-container{
-    width: auto;
-    height: 510px;
-    margin-left: 134px;
-    margin-top: 40px;
-    margin-right: 140px;
-    background: #6C6C6C;
+
+  
+.movie-details-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 30px 120px 70px 120px;
+  }
+  
+  .movie-details-content {
+    display: flex;
+    column-gap: 60px;
+    padding: 20px;
+    background-color: var(--mediumGray);
+    border-radius: 10px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;   
-}
-
-.movies-image{
-    width: 500px;
-    height: 314px;
-    padding-left: 40px;
-    padding-top: 40px;
-    
-}
-
-.movie-title-details{
-    width: 500px;
-    height: 49px;
-    text-align: center;
-    padding-left: 40px;
-    padding-top: 40px;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
+  }
+  
+  .movie-details-image-container {
+    width: 100%;
+  }
+  
+  .movie-details-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  .movie-details-info {
+    width: 100%;
+  }
+  
+  .movie-details-title {
     font-size: 36px;
     line-height: 49px;
     letter-spacing: -0.015em;
-    color: #FFFFFF;
-}
-
-.movie-year-details{
-    width:264px;
-    height: 33px;
-    padding-left: 60px;
-    text-align: left;
-    font-family: Open Sans;
-    font-style: normal;
+  }
+  
+  .movie-details-year {
     font-weight: bold;
     font-size: 24px;
     line-height: 33px;
     letter-spacing: -0.015em;
-    color: #FFC700;
-}
-
-.movie-subTitle-details{
-    white-space: nowrap;
-    padding-top: 8px;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 33px;
-    color: #FFFFFF;
-}
-
-.movie-review-details{
-    width: 480px;
-    height: 290px;
-    margin-top: 16px;
-    padding-left: 40px;
-    padding-right: 40px;
-    border: 1px solid #E1E1E1;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-.review{
-    margin-top: 16px;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
+    color: var(--yellow);
+  }
+  
+  .movie-details-subtitle {
+    font-weight: 400;
+    font-size: 18px;
     line-height: 25px;
+    letter-spacing: -0.015em;
+    margin-bottom: 10px;
+  }
+  
+  .movie-details-description-container {
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid var(--white);
+    border-radius: 10px;
+    overflow-y: auto;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .movie-details-description-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .movie-details-description-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
     text-align: justify;
     letter-spacing: -0.015em;
-    color: #9E9E9E;
-}
+  }
+  
+  .reviews-container {
+    margin-top: 20px;
+    background-color: var(--mediumGray);
+    border-radius: 10px;
+    padding: 20px 20px 0px 20px;
+    display: flex;
+    flex-direction: column;
+    max-height: 900px;
+    overflow-y: auto;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .reviews-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  @media (max-width: 1280px) {
+    .movie-details-content {
+      flex-direction: column;
+    }
+  
+    .movie-details-image {
+      height: 500px;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .movie-details-image {
+      height: 400px;
+    }
+  }
+  
+  @media (max-width: 850px) {
+    .movie-details-content {
+      flex-direction: column;
+    }
+  
+    .movie-details-image {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 730px) {
+    .movie-details-container {
+      padding: 30px 50px;
+    }
+  
+    .movie-details-description-container {
+      max-height: 150px;
+    }
+  }
+  
+  @media (max-width: 630px) {
+    .movie-details-image {
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 530px) {
+    .movie-details-container {
+      padding: 30px 50px;
+    }
+  
+    .movie-details-image {
+      height: 200px;
+    }
+  }
+  
+  @media (max-width: 430px) {
+    .movie-details-container {
+      padding: 30px;
+    }
+  
+    .movie-details-image {
+      height: 180px;
+    }
+  }
+  
+  @media (max-width: 330px) {
+    .movie-details-image {
+      height: 150px;
+    }
+  }

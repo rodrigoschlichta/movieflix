@@ -1,22 +1,35 @@
 import React from 'react';
-import { ReactComponent as MovieImage } from '../../../../core/images/image 2.svg'
+import { Movie } from '../../../../core/types/Movie';
 import './style.scss';
 
-const MovieCard = () => (
-    <div className = "movie-card">
-                <MovieImage />
-                <div>
-                    <h6 className="movie-title">O Retorno do Rei</h6>
-                    <div className="movie-year-container">
-                        <h5>2013</h5>
-                        <div className="movie-subTitle-container">
-                            <h6>O olho do inimigo está se movendo.</h6>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
-                </div>
-        </div> 
-);
+type Props = {
+  movie: Movie;
+}
+
+const MovieCard = ({ movie }: Props) => {
+
+  return (  
+
+    <div className="movie-genre-content">
+        
+    <div className="movie-card">
+      <img
+        src={movie.imgUrl}
+        alt={movie.title}
+        className="movie-image"
+        data-testid="movie-image"
+      />
+
+      <div className="movie-info-container">
+        <h3 className="movie-title">
+          {movie.title}
+        </h3>
+        <span className="movie-year">{movie.year}</span>
+        <h4 className="movie-subtitle">{movie.subTitle}</h4>
+      </div>
+      </div>
+    </div>
+  )
+};
 
 export default MovieCard;

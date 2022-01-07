@@ -5,6 +5,7 @@ import { saveSessionData } from '../../core/utils/auth';
 import { makeLogin } from '../../core/utils/request';
 import { ReactComponent as MainImage } from '../../core/images/main.svg';
 import './style.scss';
+import { useHistory } from 'react-router-dom';
 
 type FormData = {
   username : string;
@@ -15,7 +16,7 @@ const Home = () => {
 
     const {register, handleSubmit} = useForm<FormData>();
     const [hasError, setHasError] = useState(false);
-    
+    const history = useHistory();
 
     const onSubmit = (data: FormData) => {
 
@@ -23,6 +24,7 @@ const Home = () => {
         .then(response => {
           setHasError(false)
           saveSessionData(response.data)
+          history.push('/movies')
         })
         .catch(() => {
           setHasError(true)
@@ -45,7 +47,7 @@ const Home = () => {
     </div>
     <div className="home-form-auth">
       <form onSubmit = {handleSubmit(onSubmit)}>
-        <h1 className="home-login">Login</h1>
+        <h1 className="home-login">LOGIN</h1>
         {hasError && (
               <div className="alert">
                 <p className="alert-text">Dados inválidos!</p>
