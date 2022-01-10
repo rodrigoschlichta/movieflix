@@ -1,15 +1,34 @@
-import React from 'react';
-import './style.scss';
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { isAuthenticated, logout } from '../../utils/auth'
+import './style.scss'
 
-const Navbar = () => (
-    <nav className="row bg-primary main-nav">
-        <div className = "col-2">
-            <a href="/" className = "nav-logo-text">
-            <h4>MovieFlix</h4>
-            </a>
-        </div>
+const Navbar = () => {
+  const [isUserLogged, setIsUserLogged] = useState({})
+  const location = useLocation()
+
+  useEffect(() => {
+    const userLogged = isAuthenticated()
+    setIsUserLogged(userLogged)
+  }, [location])
+
+  return (
+    <nav className="navbar-container">
+      <div className="navbar-content">
+        <Link to="/movies" className="navbar-logo">MovieFlix</Link>
+        {isUserLogged && (
+          <div
+            className="navbar-logout-button"
+            onClick={ logout }
+          >
+            <span className="navbar-logout-button-text">
+              Sair
+            </span>
+          </div>
+        )}
+      </div>
     </nav>
+  )
+}
 
-);
-
-export default Navbar;
+export default Navbar
