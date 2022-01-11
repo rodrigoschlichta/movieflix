@@ -21,9 +21,9 @@ const Navbar = () => {
             className="navbar-logout-button"
             onClick={ logout }
           >
-            <span className="navbar-logout-button-text">
+            <Link to= "/" className="navbar-logout-button-text">
               Sair
-            </span>
+            </Link>
           </div>
         )}
       </div>
