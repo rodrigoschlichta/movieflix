@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import history from "../../../../../../core/utils/history"
 import { makePrivateRequest } from "../../../../../../core/utils/request"
@@ -42,13 +43,15 @@ const SaveReview = ({ movieId }: Props) => {
         className="new-review-text"
         onChange={ handleChangeReviewText }
       />
-
+      <Link to="/movies">
       <button
+        type = "submit"    
         className="new-review-button"
         onClick={ saveReview }
       >
         <span className="new-review-button-text">Salvar avaliação</span>
       </button>
+      </Link>
     </div>
   )
 }
